@@ -13,13 +13,10 @@ app.use(cors())
 let messages = []
 
 io.on("connection", (socket) => {
-  console.log("a user connected", socket.id)
-
   // Send existing messages to the connected user
   socket.emit("messages", messages)
 
   socket.on("message", (message) => {
-    console.log("message received: ", message)
     // Broadcast the new message to all connected users
     io.emit("message", message)
   })
@@ -30,7 +27,6 @@ io.on("connection", (socket) => {
 })
 
 app.get("/", (req, res) => {
-  console.log("/ request received")
   res.send("<h1>Hello world</h1>")
 })
 
